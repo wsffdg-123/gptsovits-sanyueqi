@@ -274,5 +274,36 @@
   ],
   "prev_excl": "",
   "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter0_6_mar7th_117_m.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter1_8_mar7th_235_f.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter2_2_mar7th_117_f.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter3_18_mar7th_107_m.wav": {
+  "sets": [
+   "full"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
  }
 }

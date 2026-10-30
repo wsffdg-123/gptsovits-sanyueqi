@@ -40,7 +40,37 @@ echo "== merge shards $(date +%T)"
 cd "$OPT"
 cat 2-name2text-0.txt > 2-name2text.txt
 { echo -e "item_name\tsemantic_audio"; cat 6-name2semantic-0.tsv; } > 6-name2semantic.tsv
-echo "text: $(wc -l < 2-name2text.txt), semantic: $(wc -l < 6-name2semantic.tsv)"
-echo "bert: $(ls 3-bert | wc -l), hubert: $(ls 4-cnhubert | wc -l), wav32k: $(ls 5-wav32k | wc -l), sv: $(ls 7-sv_cn | wc -l)"
+
+echo "== verify coverage $(date +%T)"
+"$PY" - << "PYEOF"
+import os, sys
+
+opt = os.environ["opt_dir"]
+names = set()
+with open(os.environ["inp_text"], encoding="utf-8") as f:
+    for line in f:
+        names.add(os.path.basename(line.split("|", 1)[0]).rsplit(".", 1)[0])
+
+dirs = {"3-bert": ".pt", "4-cnhubert": ".pt", "5-wav32k": ".wav", "7-sv_cn": ".pt"}
+problems = []
+for d, ext in dirs.items():
+    have = {f[: -len(ext)] for f in os.listdir(os.path.join(opt, d)) if f.endswith(ext)}
+    miss = names - have
+    if miss:
+        problems.append((d, sorted(miss)[:5] + ([f"... 共{len(miss)}条缺失"] if len(miss) > 5 else [])))
+
+text_lines = [l for l in open(os.path.join(opt, "2-name2text.txt"), encoding="utf-8").read().strip("\n").split("\n") if l]
+sem_lines = [l for l in open(os.path.join(opt, "6-name2semantic.tsv"), encoding="utf-8").read().strip("\n").split("\n")[1:] if l]
+if len(text_lines) != len(names):
+    problems.append(("2-name2text.txt", [f"行数 {len(text_lines)} != 清单 {len(names)}"]))
+if len(sem_lines) != len(names):
+    problems.append(("6-name2semantic.tsv", [f"行数 {len(sem_lines)} != 清单 {len(names)}"]))
+
+if problems:
+    for k, v in problems:
+        print(f"INCOMPLETE {k}: {v}", file=sys.stderr)
+    sys.exit(1)
+print(f"coverage OK: {len(names)} 条全部特征齐备")
+PYEOF
 
 echo "== preprocess done $(date +%T)"

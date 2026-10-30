@@ -244,6 +244,11 @@ def assign_tier(r) -> str:
 
 
 def quality_score(r) -> float:
+    # 特征缺失（NaN，如提取失败或缓存未命中）直接判 0 分，不得当满分
+    for col in ("snr_db", "peak", "silence_ratio", "dur"):
+        v = r[col]
+        if pd.isna(v):
+            return 0.0
     q = 1.0
     d = r["dur"]
     if d < 1.2:
@@ -422,7 +427,25 @@ def main():
                      "f0_median", "f0_range_st", "f0_std", "f0_slope", "f0_term_delta",
                      "voiced_dur"]
         cached = pd.read_csv(FEATURES_CSV, encoding="utf-8-sig")
+        cached = cached.drop_duplicates("path", keep="last")
         df = df.merge(cached[feat_cols], on="path", how="left", validate="one_to_one")
+        # 新增/变更文件在缓存中缺失 → 补算，避免 NaN 特征混入质量分
+        need = df["peak"].isna()
+        if need.any():
+            print(f"缓存缺失 {int(need.sum())} 条，补算特征 ...")
+            idx = df.index[need]
+            sub = extract_features(df.loc[idx].drop(columns=feat_cols[1:], errors="ignore"))
+            for c in feat_cols[1:]:
+                df.loc[idx, c] = sub[c].to_numpy()
+            df.loc[idx, "feat_err"] = sub["feat_err"] if "feat_err" in sub else ""
+            # 更新缓存文件
+            cached = pd.concat([cached.drop(columns=["feat_err"], errors="ignore"),
+                                sub[[c for c in ["path"] + feat_cols[1:] + (["feat_err"] if "feat_err" in sub else [])]]],
+                               ignore_index=True)
+            cached.to_csv(FEATURES_CSV, index=False, encoding="utf-8-sig")
+        err_n = int(df["feat_err"].fillna("").astype(str).ne("").sum()) if "feat_err" in df.columns else 0
+        if err_n:
+            print(f"特征提取失败 {err_n} 条（质量分记 0，资格链中排除）")
         print(f"载入缓存特征 {FEATURES_CSV}")
 
     # 套用人工文本修正（审查页面保存的 edits.json）
@@ -456,9 +479,11 @@ def main():
     fake_like = df["fake"]
     bad_dur = df["dur"] < 0.5
     lowq = df["quality"] <= 0.0
+    feat_err = df["feat_err"].fillna("").astype(str).ne("") if "feat_err" in df.columns else pd.Series(False, index=df.index)
     man_removed = df["man_removed"] == 1 if "man_removed" in df.columns else False
     df["excl"] = ""
     df.loc[man_removed, "excl"] = "人工移出"
+    df.loc[feat_err & (df["excl"] == ""), "excl"] = "特征提取失败"
     df.loc[broken & (df["excl"] == ""), "excl"] = "低采样率"
     df.loc[no_text & (df["excl"] == ""), "excl"] = "无有效文本"
     df.loc[fake_like & (df["excl"] == ""), "excl"] = "仿冒/假三月七"

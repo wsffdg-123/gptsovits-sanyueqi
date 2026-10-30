@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """为 n1 训练打包：把清单中引用的 wav 复制成 GPT-SoVITS 期望的平铺结构并打包。
 
+打包前自动运行 scripts/verify_lists.py（嵌套/泄漏校验，非零退出即中止）。
+缺失 wav 视为错误立即失败（不静默跳过）；报告每个包实际写入条数。
+
 输出 dist/:
-  mar7th_train30.tar.zst? -> mar7th_train30.tar.gz  (wavs/ + train.list)
-嵌套关系保证 train120 包含 train30 全部条目；上传 n1 后各清单独立解包引用同一 wavs。
-实际打包两个 tar: train30 自己的条目 + train120 相对 train30 的增量，服务器侧合并。
+  mar7th_train30.tar.gz / mar7th_train120.tar.gz / mar7th_val.tar.gz
+  每包含 wavs/ + <name>.list（仅含实际打包成功的条目）
 """
 import os
 import subprocess
@@ -25,32 +27,36 @@ def read_list(name):
     return rows
 
 
-def main():
-    os.makedirs(DIST, exist_ok=True)
-    t30 = read_list("train30.list")
-    t120 = read_list("train120.list")
-    t30set = {p for p, *_ in t30}
-    incr = [r for r in t120 if r[0] not in t30set]
+def pack(name, rows):
+    out = os.path.join(DIST, f"mar7th_{name}.tar.gz")
+    packed = []
+    with tarfile.open(out, "w:gz") as tar:
+        for p, spk, lang, text in rows:
+            src = os.path.join(HERE, p.replace("/", os.sep))
+            if not os.path.isfile(src):
+                raise FileNotFoundError(f"{name}: 清单文件缺失 on disk: {p}")
+            arc = "wavs/" + os.path.basename(p)
+            tar.add(src, arcname=arc)
+            packed.append(f"{arc}|{spk}|{lang}|{text}")
+        mpath = os.path.join(DIST, f"{name}.list")
+        with open(mpath, "w", encoding="utf-8") as f:
+            f.write("\n".join(packed) + "\n")
+        tar.add(mpath, arcname=f"{name}.list")
+    print(f"{out}: 实际打包 {len(packed)}/{len(rows)} 条, {os.path.getsize(out)/1e6:.1f} MB")
+    if len(packed) != len(rows):
+        raise RuntimeError(f"{name}: 打包条数 {len(packed)} != 清单 {len(rows)}")
 
-    # train120 包 = t30 子集目录 + 增量；直接打全量 train120 更简单可靠
-    for name, rows in (("train30", t30), ("train120", t120)):
-        out = os.path.join(DIST, f"mar7th_{name}.tar.gz")
-        with tarfile.open(out, "w:gz") as tar:
-            manifest = []
-            for p, spk, lang, text in rows:
-                src = os.path.join(HERE, p.replace("/", os.sep))
-                if not os.path.exists(src):
-                    print("MISSING:", p)
-                    continue
-                arc = "wavs/" + os.path.basename(p)
-                tar.add(src, arcname=arc)
-                manifest.append(f"{arc}|{spk}|{lang}|{text}")
-            mpath = os.path.join(DIST, f"{name}.list")
-            with open(mpath, "w", encoding="utf-8") as f:
-                f.write("\n".join(manifest) + "\n")
-            tar.add(mpath, arcname=f"{name}.list")
-        size = os.path.getsize(out) / 1e6
-        print(f"{out}: {len(rows)} 条, {size:.1f} MB")
+
+def main():
+    # 打包前强制校验清单约束（嵌套/泄漏），非零退出即中止
+    r = subprocess.run([sys.executable, os.path.join(HERE, "scripts", "verify_lists.py")])
+    if r.returncode != 0:
+        raise SystemExit(f"verify_lists.py 校验失败 (exit {r.returncode})，中止打包")
+
+    os.makedirs(DIST, exist_ok=True)
+    pack("train30", read_list("train30.list"))
+    pack("train120", read_list("train120.list"))
+    pack("val", read_list("val.list"))
 
 
 if __name__ == "__main__":

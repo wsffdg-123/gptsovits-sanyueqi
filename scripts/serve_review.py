@@ -186,6 +186,8 @@ def save_edit(path: str, text: str) -> dict:
     text = text.strip()
     if not text:
         raise ValueError("文本不能为空")
+    if "\n" in text or "\r" in text:
+        raise ValueError("文本不能包含换行（清单为行式格式）")
     with LOCK:
         edits = load_edits()
         edits[path] = text
