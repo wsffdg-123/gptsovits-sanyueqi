@@ -1,0 +1,37 @@
+2026-10-30 13:10:55,113	mar7th_t120_v2pp	INFO	{'train': {'log_interval': 100, 'eval_interval': 500, 'seed': 1234, 'epochs': 8, 'learning_rate': 0.0001, 'betas': [0.8, 0.99], 'eps': 1e-09, 'batch_size': 12, 'fp16_run': True, 'lr_decay': 0.999875, 'segment_size': 20480, 'init_lr_ratio': 1, 'warmup_epochs': 0, 'c_mel': 45, 'c_kl': 1.0, 'text_low_lr_rate': 0.4, 'grad_ckpt': False, 'pretrained_s2G': 'GPT_SoVITS/pretrained_models/v2Pro/s2Gv2ProPlus.pth', 'pretrained_s2D': 'GPT_SoVITS/pretrained_models/v2Pro/s2Dv2ProPlus.pth', 'if_save_latest': True, 'if_save_every_weights': True, 'save_every_epoch': 4, 'gpu_numbers': '0'}, 'data': {'max_wav_value': 32768.0, 'sampling_rate': 32000, 'filter_length': 2048, 'hop_length': 640, 'win_length': 2048, 'n_mel_channels': 128, 'mel_fmin': 0.0, 'mel_fmax': None, 'add_blank': True, 'n_speakers': 300, 'cleaned_text': True, 'exp_dir': '/home/u2023211867/tts-sovits/GPT-SoVITS/logs/mar7th_t120_v2pp'}, 'model': {'inter_channels': 192, 'hidden_channels': 192, 'filter_channels': 768, 'n_heads': 2, 'n_layers': 6, 'kernel_size': 3, 'p_dropout': 0.0, 'resblock': '1', 'resblock_kernel_sizes': [3, 7, 11], 'resblock_dilation_sizes': [[1, 3, 5], [1, 3, 5], [1, 3, 5]], 'upsample_rates': [10, 8, 2, 2, 2], 'upsample_initial_channel': 768, 'upsample_kernel_sizes': [20, 16, 8, 2, 2], 'n_layers_q': 3, 'use_spectral_norm': False, 'gin_channels': 1024, 'semantic_frame_rate': '25hz', 'freeze_quantizer': True, 'version': 'v2ProPlus'}, 's2_ckpt_dir': '/home/u2023211867/tts-sovits/GPT-SoVITS/logs/mar7th_t120_v2pp/logs_s2_v2ProPlus', 'content_module': 'cnhubert', 'save_weight_dir': 'SoVITS_weights_v2Pro', 'name': 'mar7th_t120_v2pp', 'version': 'v2ProPlus', 'pretrain': None, 'resume_step': None}
+2026-10-30 13:10:57,059	mar7th_t120_v2pp	INFO	loaded pretrained GPT_SoVITS/pretrained_models/v2Pro/s2Gv2ProPlus.pth
+2026-10-30 13:10:57,274	mar7th_t120_v2pp	INFO	loaded pretrained GPT_SoVITS/pretrained_models/v2Pro/s2Dv2ProPlus.pth
+2026-10-30 13:11:00,601	mar7th_t120_v2pp	INFO	Train Epoch: 1 [0%]
+2026-10-30 13:11:00,602	mar7th_t120_v2pp	INFO	[3.6629679203033447, 2.4106783866882324, 14.957906723022461, 20.53887939453125, 0.0, 3.5433592796325684, 0, 9.99875e-05]
+2026-10-30 13:11:40,165	mar7th_t120_v2pp	INFO	Train Epoch: 1 [80%]
+2026-10-30 13:11:40,168	mar7th_t120_v2pp	INFO	[3.718705177307129, 2.8919832706451416, 19.02996253967285, 19.95366668701172, 0.0, 2.5367636680603027, 100, 9.99875e-05]
+2026-10-30 13:11:48,711	mar7th_t120_v2pp	INFO	====> Epoch: 1
+2026-10-30 13:12:14,403	mar7th_t120_v2pp	INFO	Train Epoch: 2 [60%]
+2026-10-30 13:12:14,405	mar7th_t120_v2pp	INFO	[3.7757503986358643, 2.5567781925201416, 18.188114166259766, 19.939899444580078, 0.0, 2.6527020931243896, 200, 9.99750015625e-05]
+2026-10-30 13:12:30,325	mar7th_t120_v2pp	INFO	====> Epoch: 2
+2026-10-30 13:12:47,699	mar7th_t120_v2pp	INFO	Train Epoch: 3 [40%]
+2026-10-30 13:12:47,701	mar7th_t120_v2pp	INFO	[3.598397970199585, 2.64054274559021, 19.918367385864258, 20.93247413635254, 0.0, 1.9701652526855469, 300, 9.996250468730469e-05]
+2026-10-30 13:13:11,615	mar7th_t120_v2pp	INFO	====> Epoch: 3
+2026-10-30 13:13:20,358	mar7th_t120_v2pp	INFO	Train Epoch: 4 [20%]
+2026-10-30 13:13:20,361	mar7th_t120_v2pp	INFO	[3.6740334033966064, 2.564474105834961, 16.15714454650879, 18.60089111328125, 0.0, 2.181044578552246, 400, 9.995000937421877e-05]
+2026-10-30 13:13:52,207	mar7th_t120_v2pp	INFO	Saving model and optimizer state at iteration 4 to /home/u2023211867/tts-sovits/GPT-SoVITS/logs/mar7th_t120_v2pp/logs_s2_v2ProPlus/G_233333333333.pth
+2026-10-30 13:13:53,947	mar7th_t120_v2pp	INFO	Saving model and optimizer state at iteration 4 to /home/u2023211867/tts-sovits/GPT-SoVITS/logs/mar7th_t120_v2pp/logs_s2_v2ProPlus/D_233333333333.pth
+2026-10-30 13:13:55,775	mar7th_t120_v2pp	INFO	saving ckpt mar7th_t120_v2pp_e4:Success.
+2026-10-30 13:13:55,776	mar7th_t120_v2pp	INFO	====> Epoch: 4
+2026-10-30 13:13:56,524	mar7th_t120_v2pp	INFO	Train Epoch: 5 [0%]
+2026-10-30 13:13:56,527	mar7th_t120_v2pp	INFO	[3.466153383255005, 2.5346522331237793, 18.873493194580078, 20.15911865234375, 0.0, 1.9296729564666748, 500, 9.993751562304699e-05]
+2026-10-30 13:14:28,187	mar7th_t120_v2pp	INFO	Train Epoch: 5 [80%]
+2026-10-30 13:14:28,190	mar7th_t120_v2pp	INFO	[3.7586216926574707, 2.5124595165252686, 13.955636024475098, 18.944198608398438, 0.0, 1.957360029220581, 600, 9.993751562304699e-05]
+2026-10-30 13:14:35,986	mar7th_t120_v2pp	INFO	====> Epoch: 5
+2026-10-30 13:15:01,471	mar7th_t120_v2pp	INFO	Train Epoch: 6 [60%]
+2026-10-30 13:15:01,474	mar7th_t120_v2pp	INFO	[3.7395055294036865, 2.477020025253296, 14.572260856628418, 19.23210334777832, 0.0, 1.730427861213684, 700, 9.99250234335941e-05]
+2026-10-30 13:15:17,529	mar7th_t120_v2pp	INFO	====> Epoch: 6
+2026-10-30 13:15:35,635	mar7th_t120_v2pp	INFO	Train Epoch: 7 [40%]
+2026-10-30 13:15:35,636	mar7th_t120_v2pp	INFO	[3.6268484592437744, 2.919870138168335, 19.3343563079834, 20.372304916381836, 0.0, 2.1709976196289062, 800, 9.991253280566489e-05]
+2026-10-30 13:16:00,651	mar7th_t120_v2pp	INFO	====> Epoch: 7
+2026-10-30 13:16:09,935	mar7th_t120_v2pp	INFO	Train Epoch: 8 [20%]
+2026-10-30 13:16:09,936	mar7th_t120_v2pp	INFO	[3.6474967002868652, 2.5894992351531982, 15.832542419433594, 19.240772247314453, 0.0, 1.4382718801498413, 900, 9.990004373906418e-05]
+2026-10-30 13:16:44,265	mar7th_t120_v2pp	INFO	Saving model and optimizer state at iteration 8 to /home/u2023211867/tts-sovits/GPT-SoVITS/logs/mar7th_t120_v2pp/logs_s2_v2ProPlus/G_233333333333.pth
+2026-10-30 13:16:46,325	mar7th_t120_v2pp	INFO	Saving model and optimizer state at iteration 8 to /home/u2023211867/tts-sovits/GPT-SoVITS/logs/mar7th_t120_v2pp/logs_s2_v2ProPlus/D_233333333333.pth
+2026-10-30 13:16:48,284	mar7th_t120_v2pp	INFO	saving ckpt mar7th_t120_v2pp_e8:Success.
+2026-10-30 13:16:48,285	mar7th_t120_v2pp	INFO	====> Epoch: 8

@@ -1,0 +1,78 @@
+tmp_s1.yaml written
+Seed set to 1234
+Using 16bit Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+💡 Tip: For seamless cloud logging and experiment tracking, try installing [litlogger](https://pypi.org/project/litlogger/) to enable LitLogger, which logs metrics and artifacts automatically to the Lightning Experiments platform.
+Initializing distributed: GLOBAL_RANK: 0, MEMBER: 1/1
+----------------------------------------------------------------------------------------------------
+distributed_backend=nccl
+All distributed processes registered. Starting with 1 processes
+----------------------------------------------------------------------------------------------------
+
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/home/u2023211867/tts-sovits/miniconda3/envs/sovits/lib/python3.12/site-packages/pytorch_lightning/utilities/model_summary/model_summary.py:242: Precision 16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+<All keys matched successfully>
+ckpt_path: None
+semantic_data_len: 410
+phoneme_data_len: 410
+                         item_name                                     semantic_audio
+0          Side0_al_mar7th_101.wav  582 655 826 512 222 100 881 881 113 820 113 11...
+1             archive_mar7th_3.wav  1005 823 388 7 771 856 532 860 133 384 873 319...
+2             archive_mar7th_8.wav  327 833 141 600 493 624 69 57 242 29 234 271 2...
+3        chapter0_2_mar7th_111.wav  54 905 661 273 57 882 906 386 836 342 262 189 ...
+4        chapter0_2_mar7th_119.wav  774 592 460 866 542 237 114 237 273 273 477 25...
+..                             ...                                                ...
+405      side1_tp_mar7th_190_m.wav  1005 332 785 388 735 788 99 162 170 234 41 8 8...
+406  side2_baishi_mar7th_123_f.wav  214 963 1003 124 650 131 211 204 851 297 152 2...
+407     side2_lc1_mar7th_185_f.wav  721 941 713 381 189 78 361 510 45 295 295 73 3...
+408  sideX_paidui_mar7th_157_f.wav  278 359 141 491 871 464 870 622 967 149 967 23...
+409          archive_mar7th_26.wav  872 235 235 605 589 546 1002 121 690 928 467 1...
+
+[410 rows x 2 columns]
+deleted 1 audios who's phoneme/sec are bigger than 25 or smaller than 3
+dataset.__len__(): 409
+┏━━━┳━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━┳━━━━━━━┓
+┃   ┃ Name  ┃ Type                 ┃ Params ┃ Mode  ┃ FLOPs ┃
+┡━━━╇━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━╇━━━━━━━┩
+│ 0 │ model │ Text2SemanticDecoder │ 77.6 M │ train │     0 │
+└───┴───────┴──────────────────────┴────────┴───────┴───────┘
+Trainable params: 77.6 M                                                        
+Non-trainable params: 0                                                         
+Total params: 77.6 M                                                            
+Total estimated model params size (MB): 310.426                                 
+Modules in train mode: 257                                                      
+Modules in eval mode: 0                                                         
+Total FLOPs: 0                                                                  
+/home/u2023211867/tts-sovits/miniconda3/envs/sovits/lib/python3.12/site-packages/pytorch_lightning/utilities/_pytree.py:21: `isinstance(treespec, LeafSpec)` is deprecated, use `isinstance(treespec, TreeSpec) and treespec.is_leaf()` instead.
+/home/u2023211867/tts-sovits/miniconda3/envs/sovits/lib/python3.12/site-packages/torch/autograd/graph.py:869: UserWarning: The AccumulateGrad node's stream does not match the stream of the node that produced the incoming gradient. This may incur unnecessary synchronization and break CUDA graph capture if the AccumulateGrad node's stream is the default stream. This mismatch is caused by an AccumulateGrad node created prior to the current iteration being kept alive. This can happen if the autograd graph is still being kept alive by tensors such as the loss, or if you are using DDP, which will stash a reference to the node. To resolve the mismatch, delete all references to the autograd graph or ensure that DDP initialization is performed under the same stream as subsequent forwards. If the mismatch is intentional, you can use torch.autograd.graph.set_warn_on_accumulate_grad_stream_mismatch(False) to suppress this warning. (Triggered internally at /pytorch/torch/csrc/autograd/input_buffer.cpp:240.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+`Trainer.fit` stopped: `max_epochs=20` reached.
+Epoch 19/19 ━━━━━━━━━━━━━━━━ 69/69 0:00:05 • 0:00:00 11.67it/s v_num: 1.000     
+                                                               total_loss_step: 
+                                                               191.700 lr_step: 
+                                                               0.002            
+                                                               top_3_acc_step:  
+                                                               0.983            
+                                                               total_loss_epoch:
+                                                               678.156 lr_epoch:
+                                                               0.002            
+                                                               top_3_acc_epoch: 
+                                                               0.886            
+== gpt train done 12:43:13
+GPT_weights_v2Pro:
+total 606694
+drwxrwxr-x  2 u2023211867 u2023211867         4 Oct 30 12:41 .
+drwxrwxr-x 12 u2023211867 u2023211867        33 Oct 30 12:41 ..
+-rw-rw-r--  1 u2023211867 u2023211867 155313203 Oct 30 12:40 mar7th_t30_v2pp-e10.ckpt
+-rw-rw-r--  1 u2023211867 u2023211867 155313203 Oct 30 12:41 mar7th_t30_v2pp-e15.ckpt
+-rw-rw-r--  1 u2023211867 u2023211867 155313203 Oct 30 12:41 mar7th_t30_v2pp-e20.ckpt
+-rw-rw-r--  1 u2023211867 u2023211867 155313203 Oct 30 12:39 mar7th_t30_v2pp-e5.ckpt
+
+/home/u2023211867/tts-sovits/GPT-SoVITS/logs/mar7th_t30_v2pp/logs_s1_v2ProPlus:
+total 0
+drwxrwxr-x 5 u2023211867 u2023211867  3 Oct 30 12:31 .
+drwxrwxr-x 8 u2023211867 u2023211867 13 Oct 30 12:30 ..
+drwxrwxr-x 2 u2023211867 u2023211867  1 Oct 30 12:41 ckpt
+drwxrwxr-x 2 u2023211867 u2023211867  0 Oct 30 12:31 eval
+drwxrwxr-x 4 u2023211867 u2023211867  2 Oct 30 12:39 logs_s1_v2ProPlus

@@ -1,0 +1,24 @@
+# 数据与产物：音频、底模、权重、打包
+data/
+dist/
+*.wav
+*.pth
+*.ckpt
+*.tar.gz
+*.zip
+
+# 大体量明细（清单 .list 与 report.md 上传，CSV 本体不上传）
+select/features.csv
+select/selection.csv
+
+# Python 运行时与缓存
+.venv/
+__pycache__/
+*.pyc
+pip-*
+select/server.log
+ops_review_server.log
+
+# 系统杂项
+.DS_Store
+Thumbs.db

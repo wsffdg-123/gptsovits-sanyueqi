@@ -1,0 +1,278 @@
+{
+ "data/三月七/带变量语音 - Placeholder/chapter1_5_mar7th_231_f.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter3_11_mar7th_127_m.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter3_17_mar7th_103_m.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter4_29_mar7th_101_f.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter4_66_mar7th_109_f.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter4_67_mar7th_103_f.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter4_67_mar7th_113.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter4_67_mar7th_115_f.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter5_16_mar7th_189_f.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/side1_ytzx_mar7th_285_f.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter1_2_mar7th_239.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_70_mar7th_107.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_70_mar7th_104.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_70_mar7th_101.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_67_mar7th_117.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_67_mar7th_105.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_67_mar7th_112.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_66_mar7th_112.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_66_mar7th_105.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_66_mar7th_104.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_66_mar7th_103.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_40_mar7th_102.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_2_mar7th_101.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_266.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_264.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_255.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_245.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_240.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_232.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_226.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_221.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_67_mar7th_114.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_67_mar7th_106.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ }
+}
