@@ -107,6 +107,26 @@ python ~/tts-sovits/infer_t120.py
 | `GPT-SoVITS/logs/mar7th_t{30,120}_v2pp/logs_s2_v2ProPlus/{G,D}_*.pth` | SoVITS 完整训练态（含 optimizer，续训用） |
 | `outputs/t30_e12/` `outputs/t120/{e10,e15}/` | 试听 wav（本地副本在 E:\App\QQbot\tts\outputs\） |
 
+## 推理配置定稿（2026-10-31 盲听矩阵结论）
+
+96 条对照矩阵（3 参考 × 2 参数 × 权重组合 + 底模基线，脚本 `ab_matrix.py`，
+试听指南 `outputs/ab/LISTEN.md`）盲听结论：
+
+- **参考音频是音色偏差的主导因素，不是训练问题**：参考A（狗狗句 Side0_al_mar7th_101，
+  F0≈381Hz 偏高亢）导致合成整体 F0 抬到 400Hz；换参考后立即回到 292–320Hz（原声 314Hz）。
+- **checkpoint 无退化**：GPT e10/e15 × SoVITS e4/e8 四组与预训练底模 F0 高度一致
+  （291–299Hz），SoVITS 8 epoch 无过拟合，无需重训。
+- **定稿配置**：参考C = `chapter1_2_mar7th_236.wav`（"嘻嘻，明察秋毫，心细如发——
+  说的就是本姑娘我啦！"，5.6s，F0≈291Hz，日常平静带笑音）+
+  `top_k=15 / top_p=1.0 / temperature=1.0`。已固化到 infer_t30/t120/val_line.py。
+- 参考音频选择策略：日常平静档、4.5–9s、quality≥1.0、F0≈295–315Hz（贴近训练中位 306–327Hz
+  的下半区）、台词与录音逐字一致。
+- cool 参数（top_p0.6/temp0.6）整体略稳但对短语气句（"呃…"开头）有采样重复崩坏风险；
+  low-top_p 下的崩坏与个别句子的人名语义（如"布洛妮娅"）处理欠佳属已知限制，暂不追究。
+
+对照与验证脚本：`ab_matrix.py`（矩阵）、`fix_refc.py`（参数点复验）、
+`infer_val_line.py`（同文本原声/合成对照）。
+
 ## 训练耗时参考（4090D）
 
 | 阶段 | t30 (410条) | t120 (1459条) |

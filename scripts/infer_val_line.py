@@ -26,8 +26,8 @@ SOVITS = os.path.expanduser(
     "~/tts-sovits/GPT-SoVITS/SoVITS_weights_v2Pro/mar7th_t120_v2pp_e8_fixed.pth")
 GPT_CKPT = os.path.expanduser("~/tts-sovits/GPT-SoVITS/GPT_weights_v2Pro/mar7th_t120_v2pp-e15.ckpt")
 REF = os.path.expanduser(
-    "~/tts-sovits/data/mar7th_train30/wavs/Side0_al_mar7th_101.wav")
-REF_TEXT = "哇，这么可爱的狗狗！…哇，你也来了。"
+    "~/tts-sovits/data/mar7th_train30/wavs/chapter1_2_mar7th_236.wav")
+REF_TEXT = "嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！"  # 盲听定稿 refC+hot
 OUT_DIR = os.path.expanduser("~/tts-sovits/outputs/t120_e15_vs_orig")
 os.makedirs(OUT_DIR, exist_ok=True)
 

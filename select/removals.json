@@ -305,5 +305,64 @@
   ],
   "prev_excl": "",
   "reason": "人工移出"
+ },
+ "data/三月七/chapter3_33_mar7th_179.wav": {
+  "sets": [
+   "full",
+   "train120",
+   "train30"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/chapter4_66_mar7th_107.wav": {
+  "sets": [
+   "full"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/side2_lc1_mar7th_257.wav": {
+  "sets": [
+   "full",
+   "train120"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter0_8_mar7th_141_m.wav": {
+  "sets": [
+   "full"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter1_10_mar7th_206_m.wav": {
+  "sets": [
+   "full"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter1_10_mar7th_207_f.wav": {
+  "sets": [
+   "full"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter1_10_mar7th_216_m.wav": {
+  "sets": [
+   "full"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter1_4_mar7th_213_f.wav": {
+  "sets": [
+   "full"
+  ],
+  "prev_excl": "",
+  "reason": "人工移出"
  }
 }

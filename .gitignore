@@ -6,6 +6,10 @@ dist/
 *.ckpt
 *.tar.gz
 *.zip
+outputs/ab/
+outputs/fix_refc/
+outputs/t30_e12/
+outputs/t120/
 
 # 大体量明细（清单 .list 与 report.md 上传，CSV 本体不上传）
 select/features.csv
