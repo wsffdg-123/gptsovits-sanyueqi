@@ -127,6 +127,24 @@ python ~/tts-sovits/infer_t120.py
 对照与验证脚本：`ab_matrix.py`（矩阵）、`fix_refc.py`（参数点复验）、
 `infer_val_line.py`（同文本原声/合成对照）。
 
+## 半卡推理与 cudnn v8 性能修复（2026-10-31）
+
+n1 GPU 曾以半卡状态运行（可见显存 12032MiB，Virtualization Mode None，无 vGPU）。
+测试结论（test_halfcard.py，定稿配置 refC+hot+e15/e8）：
+
+- 显存峰值仅 **1.7GB**（torch alloc），半卡余量巨大；6/6 成功
+- **性能修复**：初测 35s/句（0.1x 实时）。定位：GPU kernel 总计仅 0.75s，
+  aten::cudnn_convolution 的 **CPU 侧调用耗时 40.8s**（378 次 × 108ms）——
+  cudnn v8 前端在 ConvTranspose1d 变长形状下每次调用重建执行图（缓存永不命中）。
+  解法：export TORCH_CUDNN_V8_API_DISABLED=1（已写入 env.sh 与全部推理脚本，
+  torch 导入前 os.environ.setdefault 生效）
+- 修复后半卡推理：**平均 2.6s/句，5/6 ≥1x 实时**，长句 7.1s 音频 2.2s 合成（3.3x 实时）；
+  模型加载 3.7s
+- 部署建议：api_v2 常驻进程启动后先跑 2-3 句 warmup（首句含 cudnn 各形状
+  算法搜索 ~5s），之后稳态 1.4-2.2s/句
+- 另注意：SV 说话人向量（compute_embedding3）在每次 run() 都对参考音频重算；
+  同一参考连续对话时上游可缓存（健康 GPU 上单次 ~0.3s，影响小）
+
 ## 训练耗时参考（4090D）
 
 | 阶段 | t30 (410条) | t120 (1459条) |

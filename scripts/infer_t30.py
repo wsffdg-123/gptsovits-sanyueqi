@@ -5,6 +5,8 @@
 默认从 val.list 固定种子抽 6 条（覆盖不同情绪分层）。
 输出: ~/tts-sovits/outputs/t30_e12/val_<idx>.wav
 """
+import os
+os.environ.setdefault("TORCH_CUDNN_V8_API_DISABLED", "1")  # cudnn v8 前端在变长 conv 上缓存失效，强制 legacy API
 import argparse
 import os
 import random

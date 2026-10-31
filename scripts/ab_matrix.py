@@ -7,6 +7,8 @@
 
 基线 B0 = GPT e15 + SoVITS e8_fixed + 狗狗参考 + topk15/topp1.0/temp1.0
 """
+import os
+os.environ.setdefault("TORCH_CUDNN_V8_API_DISABLED", "1")  # cudnn v8 前端在变长 conv 上缓存失效，强制 legacy API
 import argparse
 import os
 import random

@@ -5,6 +5,8 @@
 默认对比 e15 与 e10 两个 GPT ckpt，同一批固定种子抽样句。
 输出: ~/tts-sovits/outputs/t120/{tag}/*.wav
 """
+import os
+os.environ.setdefault("TORCH_CUDNN_V8_API_DISABLED", "1")  # cudnn v8 前端在变长 conv 上缓存失效，强制 legacy API
 import argparse
 import os
 import random

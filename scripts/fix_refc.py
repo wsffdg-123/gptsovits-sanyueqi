@@ -5,6 +5,8 @@
 输出: ~/tts-sovits/outputs/fix_refc/<参数组>/baoxiao_seed<k>.wav + val_<n>.wav
 """
 import os
+os.environ.setdefault("TORCH_CUDNN_V8_API_DISABLED", "1")  # cudnn v8 前端在变长 conv 上缓存失效，强制 legacy API
+import os
 import sys
 
 GPT_ROOT = os.path.expanduser("~/tts-sovits/GPT-SoVITS")

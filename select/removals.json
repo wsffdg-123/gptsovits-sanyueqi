@@ -364,5 +364,10 @@
   ],
   "prev_excl": "",
   "reason": "人工移出"
+ },
+ "data/三月七/带变量语音 - Placeholder/chapter2_1_mar7th_117_f.wav": {
+  "sets": [],
+  "prev_excl": "同文本重复(take spare)",
+  "reason": "人工移出"
  }
 }
