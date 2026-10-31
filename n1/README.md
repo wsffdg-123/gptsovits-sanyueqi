@@ -140,6 +140,12 @@ n1 GPU 曾以半卡状态运行（可见显存 12032MiB，Virtualization Mode No
   torch 导入前 os.environ.setdefault 生效）
 - 修复后半卡推理：**平均 2.6s/句，5/6 ≥1x 实时**，长句 7.1s 音频 2.2s 合成（3.3x 实时）；
   模型加载 3.7s
+- **显存修正（2026-10-31 复测）**：稳态/短句 ~2.2GB；**长句推理峰值可达 torch alloc 6.4GB /
+  reserved 7.7GB**（test_halfcard 6/6 实测计数器）——此前记录的"峰值 1.7GB"是模型加载后的
+  数值而非推理峰值。半卡 12GB 下与他人共存（~2.2GB）仍安全；部署估算请按 8GB 起步
+- **0.1 卡结论（test_memcap.py 两档实测）**：1203MB（半卡基数）模型加载即 OOM；
+  2456MB（全卡基数）模型加载 OK（1.25GB）但推理 OOM（长句注意力大画布单笔 ~4.6GB 申请，
+  expandable_segments 无效）。**0.1 卡不可用，最低可行档 ≈ 半卡 12GB**
 - 部署建议：api_v2 常驻进程启动后先跑 2-3 句 warmup（首句含 cudnn 各形状
   算法搜索 ~5s），之后稳态 1.4-2.2s/句
 - 另注意：SV 说话人向量（compute_embedding3）在每次 run() 都对参考音频重算；
@@ -185,6 +191,12 @@ kill $(cat ~/tts-sovits/api.pid)
   Git Bash 的 curl 发中文会变 GBK，测试用 python urllib（api_smoke.py 即示例）
 
 本地脚本 `scripts/{mar7th_api.py,run_api.sh,api_smoke.py}` 与 n1 `~/tts-sovits/` 同名对应。
+
+**隧道自愈接线（2026-10-31）**：本地 `ops/supervisor.ps1` 的 tts-tunnel 目标去掉了 `-N`，
+改为远端命令 `bash ~/tts-sovits/ensure_api.sh; exec sleep infinity`——隧道每次（重）连先幂等
+拉起 n1 API（`ensure_api.sh`：端口在即秒过；否则 nohup 启动并等就绪，上限 120s），再保持隧道。
+服务器重启/重分配后整条链自愈：supervisor 10s 轮询发现端口断 → 重连隧道 → 远端命令拉起 API，
+实测恢复周期 ~60-75s（期间请求失败，bot 侧需容错重试）。
 
 ## v5 零样本测试（2026-10-31）
 
