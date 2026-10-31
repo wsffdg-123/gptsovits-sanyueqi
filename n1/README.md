@@ -145,6 +145,44 @@ n1 GPU 曾以半卡状态运行（可见显存 12032MiB，Virtualization Mode No
 - 另注意：SV 说话人向量（compute_embedding3）在每次 run() 都对参考音频重算；
   同一参考连续对话时上游可缓存（健康 GPU 上单次 ~0.3s，影响小）
 
+## API 封装：mar7th_api.py（2026-10-31）
+
+定稿配置全部固化在服务端，客户端只需传 `text`。没有用仓库自带 api_v2：该 commit
+（b4570b8）的 api_v2 无默认参考音频回退（`ref_audio_path is required`），每次请求
+都得带权重/参考 5 个字段，封装反而漏到客户端。故基于 `TTS_infer_pack.TTS` 直写薄服务。
+
+| 项 | 值 |
+|---|---|
+| 权重 | t120 GPT e15 + SoVITS e8_fixed |
+| 参考音频 | refC `chapter1_2_mar7th_236.wav`（含提示文本，服务端默认） |
+| 默认采样 | hot：top_k 15 / top_p 1.0 / temperature 1.0（可逐请求覆盖） |
+| 端口 | 0.0.0.0:9880（n1 主机防火墙未放行，外部须走 ssh 隧道） |
+| 显存 | 常驻 ~2GB（半卡 12032MiB 环境实测） |
+
+```bash
+# 启动（模型加载 ~4s + 预热 2 句，~10s 后端口开放即已热）
+nohup bash ~/tts-sovits/run_api.sh > ~/tts-sovits/logs/api.log 2>&1 &
+# 冒烟/预热（n1 上；Windows 侧 python scripts/api_smoke.py --host 127.0.0.1 走隧道）
+~/tts-sovits/miniconda3/envs/sovits/bin/python ~/tts-sovits/api_smoke.py --save ~/tts-sovits/outputs/api_smoke
+# 停止
+kill $(cat ~/tts-sovits/api.pid)
+```
+
+接口：
+- `GET /tts?text=...` / `POST /tts {"text": ...}` → `audio/wav`；响应头
+  `X-Synth-Seconds` 为服务端合成耗时。可选覆盖参数 `top_k/top_p/temperature/speed_factor(0.5-3)/seed`；
+  失败返回 400/500 JSON `{"message": ...}`（空文本、超 1000 字、参数非法、采样崩坏无音频）
+- `GET /health` → 权重/参考/默认参数自检
+
+调用路径（2026-10-31 实测）：
+- Windows → n1 直连 9880 被主机防火墙拒绝（10061），**须开隧道**：
+  `ssh -N -L 9880:127.0.0.1:9880 n1`，然后请求 `http://127.0.0.1:9880`
+- 隧道实测（QQbot 调用路径）：短句 1.3s、中句 1.3s、长句 1.8s（6.9s 音频，3.8x 实时）
+- 客户端注意：单并发（GPU 内部已串行，bot 一次只发一句）；HTTP 超时建议 ≥60s；
+  Git Bash 的 curl 发中文会变 GBK，测试用 python urllib（api_smoke.py 即示例）
+
+本地脚本 `scripts/{mar7th_api.py,run_api.sh,api_smoke.py}` 与 n1 `~/tts-sovits/` 同名对应。
+
 ## 训练耗时参考（4090D）
 
 | 阶段 | t30 (410条) | t120 (1459条) |
