@@ -47,7 +47,8 @@ def build_cfg(version: str) -> TTS_Config:
         "cnhuhbert_base_path": "GPT_SoVITS/pretrained_models/chinese-hubert-base",
         "bert_base_path": "GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large",
     }
-    return TTS_Config({version: dict(section), "custom": dict(section)})
+    # 只传 custom 键，避免覆盖 default_configs[version]（LoRA 底模解析依赖它；零样本虽恰好无害，保持一致）
+    return TTS_Config({"custom": dict(section)})
 
 
 for variant in VARIANTS:

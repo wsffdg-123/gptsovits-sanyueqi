@@ -201,6 +201,29 @@ s1v3.ckpt，仅 SoVITS + vocoder 换新。官方宣称零样本（不微调）�
   **v5turbo（4步/cfg0.0）加载 3.4s、稳态 1.6–2.2s/句，与 v2ProPlus 相当**
 - 决策：盲听吞字/音色后定——v5turbo 零样本达标即免训练上线；差一口气再走 v5 微调
 
+## v5 LoRA 微调（2026-10-31）
+
+零样本之后接续微调。关键结论：
+
+- **路线**：v3/v4/v5 走 `s2_train_v3_lora.py`（纯 CFM LoRA，无判别器，**不需要 s2D**）；
+  LoRA rank 32（webui 默认档 16/32/64/128），底模 = gsv-v5-pretrained/s2G<variant>.pth
+- **训练**：batch 12 OOM（DiT 注意力 20.9GB fp16）→ **batch 8 + grad_ckpt=True**（6.8GB，3.4it/s），
+  1459 条每变体约 7 分钟；预处理产物直接复用 logs/mar7th_t120_v2pp（v5 用 LoaderV4 读同一套 2/4/5/6）
+- **GPT 不重训**：t2s 各版本通用，复用 mar7th_t120_v2pp-e15.ckpt
+- **导出**：savee 产物带版本标签头，重读必须 `load_sovits_new`（torch.load 直接读会
+  unpickling stack underflow）；且 savee 存 HParams config 推理端不可下标访问，
+  须重写为 dict（run_train_t120_v5.sh 的 fixed 导出步骤）
+- **推理配置大坑（已排障）**：`TTS_Config(dict)` 的 `configs_.update(configs)` 会用传入的
+  version 键**覆盖 default_configs[version]**；LoRA 推理端从这个结构解析底模
+  （`path_sovits = default_configs[model_version]['vits_weights_path']`）——若把 version 键
+  一并传入且 vits 指向 LoRA pth，底模就成了 LoRA 自己，SoVITS 实为随机初始化
+  （症状：音量 1/3、时长 2–5 倍、prompt semantic 全乱）。**config dict 只传 `custom` 键**。
+  （v2ProPlus 非 LoRA 不受影响——它直接加载 weights_path，不走底模解析）
+- **脚本**：`run_train_t120_v5.sh`（训练+导出）、`v5_finetune_test.py`（三组合对照：
+  e15/v5turbo-lora、e15/v5dev-lora、s1v3/v5turbo-lora），日志 `train_logs/v5_finetune_test.log`，
+  试听 `outputs/v5_ft/LISTEN.md`
+- 修复后速度：v5turbo 稳态 0.8–2.3s/句；v5dev 2.3–4.4s/句
+
 ## 训练耗时参考（4090D）
 
 | 阶段 | t30 (410条) | t120 (1459条) |
