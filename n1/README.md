@@ -177,11 +177,29 @@ kill $(cat ~/tts-sovits/api.pid)
 调用路径（2026-10-31 实测）：
 - Windows → n1 直连 9880 被主机防火墙拒绝（10061），**须开隧道**：
   `ssh -N -L 9880:127.0.0.1:9880 n1`，然后请求 `http://127.0.0.1:9880`
+- **bot 已接入（2026-10-31）**：隧道由 `ops/supervisor.ps1` 的 `tts-tunnel` 目标
+  常驻管理（BatchMode/ExitOnForwardFailure，断线自动重启，面板可启停），
+  核心插件 `send_message` 的 voice 项经 `voice_tts.py` 调用，无需手动开隧道
 - 隧道实测（QQbot 调用路径）：短句 1.3s、中句 1.3s、长句 1.8s（6.9s 音频，3.8x 实时）
 - 客户端注意：单并发（GPU 内部已串行，bot 一次只发一句）；HTTP 超时建议 ≥60s；
   Git Bash 的 curl 发中文会变 GBK，测试用 python urllib（api_smoke.py 即示例）
 
 本地脚本 `scripts/{mar7th_api.py,run_api.sh,api_smoke.py}` 与 n1 `~/tts-sovits/` 同名对应。
+
+## v5 零样本测试（2026-10-31）
+
+背景：v2ProPlus 定稿仍有吞字，尝试升级 v5。该 commit（b4570b8）原生支持
+`v5dev` / `v5turbo`（`V5_VERSIONS = {"v5", "v5dev", "v5turbo"}`），t2s 不变仍用
+s1v3.ckpt，仅 SoVITS + vocoder 换新。官方宣称零样本（不微调）音色相似度显著提升、
+新 vocoder 消除高频镜像伪影。
+
+- 底模下载：`dl_v5.sh`（hf-mirror，~1.6GB → `GPT_SoVITS/pretrained_models/gsv-v5-pretrained/`：
+  s2Gv5dev.pth 766MB / s2Gv5turbo.pth 766MB / vocoder.pth 58MB；训练底模 s2D 另需确认来源）
+- 零样本 = 原版 s1v3.ckpt + v5 底模，参考音频 refC，hot 采样参数；脚本 `v5_zeroshot.py`，
+  日志 `train_logs/v5_zeroshot.log`，试听 `outputs/v5_zeroshot/LISTEN.md`
+- 实测速度（全卡 4090D）：v5dev（32步/cfg1.30）加载 5.4s、稳态 2.0–4.0s/句（慢）；
+  **v5turbo（4步/cfg0.0）加载 3.4s、稳态 1.6–2.2s/句，与 v2ProPlus 相当**
+- 决策：盲听吞字/音色后定——v5turbo 零样本达标即免训练上线；差一口气再走 v5 微调
 
 ## 训练耗时参考（4090D）
 

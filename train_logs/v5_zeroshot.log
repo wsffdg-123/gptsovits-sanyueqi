@@ -1,0 +1,211 @@
+
+===== v5dev =====
+Loading Text2Semantic weights from GPT_SoVITS/pretrained_models/s1v3.ckpt
+Removing weight norm...
+loading vocoder <All keys matched successfully>
+Loading VITS weights from GPT_SoVITS/pretrained_models/gsv-v5-pretrained/s2Gv5dev.pth. <All keys matched successfully>
+Loading BERT weights from GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large
+Loading CNHuBERT weights from GPT_SoVITS/pretrained_models/chinese-hubert-base
+模型加载 5.4s
+[1;31m2026-10-31 06:41:34.331183449 [E:onnxruntime:Default, provider_bridge_ort.cc:2458 operator()] /onnxruntime_src/onnxruntime/core/session/provider_bridge_ort.cc:2043 onnxruntime::Provider& onnxruntime::ProviderLibrary::Get() [ONNXRuntimeError] : 1 : FAIL : Failed to load library /home/u2023211867/tts-sovits/miniconda3/envs/sovits/lib/python3.12/site-packages/onnxruntime/capi/libonnxruntime_providers_cuda.so with error: libcublasLt.so.13: cannot open shared object file: No such file or directory
+[m
+Set seed to 2682206374
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+Failed to load libcublasLt.so.13: libcublasLt.so.13: cannot open shared object file: No such file or directory
+Failed to load libcublas.so.13: libcublas.so.13: cannot open shared object file: No such file or directory
+Failed to load libcudart.so.13: libcudart.so.13: cannot open shared object file: No such file or directory
+Please follow https://onnxruntime.ai/docs/install/#cuda-and-cudnn to install CUDA.
+############ Segment Text ############
+Actual Input Target Text:
+。呃…能让布洛妮娅帮咱们报销吗？
+Actual Input Target Text (after sentence segmentation):
+['。呃…能让布洛妮娅帮咱们报销吗？']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 31.15it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['.呃…能让布洛妮娅帮咱们报销吗?']
+############ Predict Semantic Token ############
+INFO:tools.acceleration:FlashAttention is unavailable: No module named 'flash_attn'
+[INFO] Loading Text2Semantic Weights from GPT_SoVITS/pretrained_models/s1v3.ckpt
+with torch_static_cuda_graph Backend                                            
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+3.048	0.034	1.438	2.114
+baoxiao: 合成 6.93s → 音频 3.6s (0.5x 实时)
+Set seed to 438640918
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+。嘿嘿，乔瓦尼先生说得对。决胜乐园的徽章已经都集齐了…接下来就只等大赛开幕咯！
+Actual Input Target Text (after sentence segmentation):
+['。嘿嘿，乔瓦尼先生说得对。决胜乐园的徽章已经都集齐了…接下来就只等大赛开幕咯！']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 10.45it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['.嘿嘿,乔瓦尼先生说得对.决胜乐园的徽章已经都集齐了…接下来就只等大赛开幕咯!']
+############ Predict Semantic Token ############
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.000	0.096	0.685	2.878
+val_2: 合成 3.91s → 音频 7.6s (1.9x 实时)
+Set seed to 1446490646
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+。没错，我就是那个三月七
+Actual Input Target Text (after sentence segmentation):
+['。没错，我就是那个三月七。']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 21.55it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['.没错,我就是那个三月七.']
+############ Predict Semantic Token ############
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.000	0.047	0.298	1.471
+val_3: 合成 2.04s → 音频 3.0s (1.5x 实时)
+Set seed to 1168140898
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+只是个建议啦——没事，你有我呢！
+Actual Input Target Text (after sentence segmentation):
+['只是个建议啦——没事，你有我呢！']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.10it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['只是个建议啦没事,你有我呢!']
+############ Predict Semantic Token ############
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.000	0.053	0.320	1.476
+val_4: 合成 2.08s → 音频 3.2s (1.5x 实时)
+Set seed to 3668769889
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+。开拓者，快看！围墙后边好像有座灯炉诶
+Actual Input Target Text (after sentence segmentation):
+['。开拓者，快看！围墙后边好像有座灯炉诶。']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 14.14it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['.开拓者,快看!围墙后边好像有座灯炉诶.']
+############ Predict Semantic Token ############
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.000	0.071	0.349	1.575
+val_5: 合成 2.22s → 音频 4.0s (1.8x 实时)
+
+===== v5turbo =====
+Loading Text2Semantic weights from GPT_SoVITS/pretrained_models/s1v3.ckpt
+Removing weight norm...
+loading vocoder <All keys matched successfully>
+Loading VITS weights from GPT_SoVITS/pretrained_models/gsv-v5-pretrained/s2Gv5turbo.pth. <All keys matched successfully>
+Loading BERT weights from GPT_SoVITS/pretrained_models/chinese-roberta-wwm-ext-large
+Loading CNHuBERT weights from GPT_SoVITS/pretrained_models/chinese-hubert-base
+模型加载 3.4s
+Set seed to 1132385182
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+。呃…能让布洛妮娅帮咱们报销吗？
+Actual Input Target Text (after sentence segmentation):
+['。呃…能让布洛妮娅帮咱们报销吗？']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 32.24it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['.呃…能让布洛妮娅帮咱们报销吗?']
+############ Predict Semantic Token ############
+[INFO] Loading Text2Semantic Weights from GPT_SoVITS/pretrained_models/s1v3.ckpt
+with torch_static_cuda_graph Backend                                            
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.131	0.032	1.001	0.773
+baoxiao: 合成 2.21s → 音频 4.2s (1.9x 实时)
+Set seed to 1050834553
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+。嘿嘿，乔瓦尼先生说得对。决胜乐园的徽章已经都集齐了…接下来就只等大赛开幕咯！
+Actual Input Target Text (after sentence segmentation):
+['。嘿嘿，乔瓦尼先生说得对。决胜乐园的徽章已经都集齐了…接下来就只等大赛开幕咯！']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 10.06it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['.嘿嘿,乔瓦尼先生说得对.决胜乐园的徽章已经都集齐了…接下来就只等大赛开幕咯!']
+############ Predict Semantic Token ############
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.000	0.100	0.702	0.703
+val_2: 合成 1.76s → 音频 7.6s (4.3x 实时)
+Set seed to 1969347595
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+。没错，我就是那个三月七
+Actual Input Target Text (after sentence segmentation):
+['。没错，我就是那个三月七。']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 20.28it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['.没错,我就是那个三月七.']
+############ Predict Semantic Token ############
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.000	0.050	0.296	1.019
+val_3: 合成 1.61s → 音频 2.7s (1.7x 实时)
+Set seed to 3646827665
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+只是个建议啦——没事，你有我呢！
+Actual Input Target Text (after sentence segmentation):
+['只是个建议啦——没事，你有我呢！']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 19.79it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['只是个建议啦没事,你有我呢!']
+############ Predict Semantic Token ############
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.000	0.051	0.303	1.068
+val_4: 合成 1.67s → 音频 2.6s (1.6x 实时)
+Set seed to 2848653400
+Parallel Inference Mode Enabled
+When parallel inference mode is enabled, SoVITS V3/4 models do not support bucket processing; bucket processing has been automatically disabled.
+Actual Input Reference Text: 嘻嘻，明察秋毫，心细如发——说的就是本姑娘我啦！
+############ Segment Text ############
+Actual Input Target Text:
+。开拓者，快看！围墙后边好像有座灯炉诶
+Actual Input Target Text (after sentence segmentation):
+['。开拓者，快看！围墙后边好像有座灯炉诶。']
+############ Extract Text BERT Features ############
+  0%|          | 0/1 [00:00<?, ?it/s]100%|██████████| 1/1 [00:00<00:00, 13.77it/s]
+############ 推理 ############
+Processed text from the frontend (per sentence): ['.开拓者,快看!围墙后边好像有座灯炉诶.']
+############ Predict Semantic Token ############
+############ Synthesize Audio ############
+Parallel Synthesis in Progress...
+0.000	0.073	0.492	0.762
+val_5: 合成 1.60s → 音频 4.9s (3.0x 实时)
+
+V5 ZEROSHOT DONE
