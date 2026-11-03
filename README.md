@@ -10,8 +10,11 @@ scripts/            全部流水线脚本（数据筛选 / 审查服务 / 打包
 select/             筛选产物：四个训练清单 .list、report.md、明细列说明 COLUMNS.md
 n1/                 n1 服务器训练档案：环境搭建、实际生效配置、训练日志、坑与修正
 outputs/            试听 wav（t30 验证轮 / t120 正式轮，val 集文本合成）
-role/               角色卡素材：台词全集、语言风格统计、场景索引、设定证据、角色卡草稿
 ```
+
+**模型权重**（定稿 t120 SoVITS e8 + GPT e15）发布在：
+https://huggingface.co/wsffdg/GPT-SoVITS-v2ProPlus-Finetuned-Sayuki-in-Hokai
+（角色卡素材因版权考虑不入公开仓库，仅本地保留）
 
 ## 快速了解
 
@@ -33,7 +36,7 @@ role/               角色卡素材：台词全集、语言风格统计、场景
 2. 审查与人工清洗：`python scripts/serve_review.py --port 6270 --open`
 3. 上传 n1：`python scripts/pack_for_n1.py` → scp → `n1/README.md` 的训练流程
 4. 训练环境细节（torchcodec 兼容补丁、权重导出修正等坑）：`n1/README.md`
-5. 角色卡素材：`python scripts/build_role_corpus.py` → 见 `role/README.md`（只读清单，不改训练数据）
+5. 角色卡素材：`python scripts/build_role_corpus.py`（产物 role/ 仅存本地，不入库）
 
 ## 许可与来源
 

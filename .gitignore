@@ -14,8 +14,8 @@ outputs/t120/
 # 大体量明细（清单 .list 与 report.md 上传，CSV 本体不上传）
 select/features.csv
 select/selection.csv
-# 角色卡逐条机器产物，可由清单重建（role/*.md 与角色卡草稿入库）
-role/corpus.jsonl
+# 角色卡逐条机器产物与草稿：全部仅存本地，因版权考虑不入公开仓库
+role/
 
 # Python 运行时与缓存
 .venv/
